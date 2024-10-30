@@ -1,0 +1,29 @@
+name: Deploy to Firebase
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Change to your preferred Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Set up Firebase Service Account
+        run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" > functions/serviceKey.json
+
+      - name: Deploy to Firebase
+        run: npm run deploy  # Adjust this command to fit your deployment script
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: functions/serviceKey.json
