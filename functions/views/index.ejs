@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getStorage, connectStorageEmulator } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAaFD4t6s8BtaBVWP8Vp-MWPBMK5eiuPF0",
+            authDomain: "capstonewebf.firebaseapp.com",
+            projectId: "capstonewebf",
+            storageBucket: "capstonewebf.appspot.com",
+            messagingSenderId: "312937405913",
+            appId: "1:312937405913:web:55c81fc050a08c1af64dc8"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const storage = getStorage(app);
+
+        // Use the Storage emulator if running locally
+        if (window.location.hostname === "localhost") {
+            connectStorageEmulator(storage, "localhost", 9199);
+        }
+    </script>
+</head>
+<body>
+    <h1>Upload an Image</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" accept="image/*" required>
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
